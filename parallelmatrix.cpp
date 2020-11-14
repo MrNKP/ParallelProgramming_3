@@ -68,12 +68,10 @@ threadResult ParallelMatrix::sumSingleThread()
     double startTime, finishTime;
     timer.start();
     startTime = omp_get_wtime();
-    //sum(matrixPtr, 0, sizeX*sizeY, ref(lms));
-//    for (int i=0; i<sizeX; i++)
-//        for (int j=0; j<sizeY; j++)
-//            matrixSum += matrix[i][j];
+
     for (int i=0; i<sizeX*sizeY; i++)
         matrixSum += matrixPtr[i];
+
     finishTime = omp_get_wtime();
     long long time = timer.elapsed();
 //    cout << "Matrix Sum Single Thread = " << matrixSum << endl;
@@ -93,9 +91,6 @@ threadResult ParallelMatrix::sumTwoThreads()
     int *matrixPtr = matrix[0];
     int blocksize = sizeX*sizeY / 2;
     cout << endl << "Two Threads" << endl;
-    //sum(matrixPtr, 0, sizeX*sizeY, ref(lms));
-//    for (int i=0; i<sizeX*sizeY; i++)
-//        matrixSum += matrixPtr[i];
 
     int localSum;
     int threadNum;
@@ -136,9 +131,6 @@ threadResult ParallelMatrix::sumLogicThreads()
     int *matrixPtr = matrix[0];
     int blocksize = sizeX*sizeY / logicThreads;
     cout << endl << "Logic Threads" << endl;
-    //sum(matrixPtr, 0, sizeX*sizeY, ref(lms));
-//    for (int i=0; i<sizeX*sizeY; i++)
-//        matrixSum += matrixPtr[i];
 
     int localSum;
     int threadNum;
@@ -180,9 +172,6 @@ threadResult ParallelMatrix::sum2LogicThreads()
     int *matrixPtr = matrix[0];
     int blocksize = sizeX*sizeY / localLogicThreads;
     cout << endl << "2xLogic Threads" << endl;
-    //sum(matrixPtr, 0, sizeX*sizeY, ref(lms));
-//    for (int i=0; i<sizeX*sizeY; i++)
-//        matrixSum += matrixPtr[i];
 
     int localSum;
     int threadNum;
